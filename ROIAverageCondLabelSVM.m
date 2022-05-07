@@ -2,7 +2,7 @@ addpath(genpath('fmri_project'))
 
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};
 
-fprintf('Average ROI (supervoxel)\n')
+fprintf('Average ROI (supervoxel)\nSVM Classifier (1v1 if multi-class)\n')
 fprintf('(Conditions 0-3 used as labels)\n')
 
 % ROI avg for 3 training sets against 3 testing sets
