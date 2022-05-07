@@ -3,10 +3,10 @@ addpath(genpath('fmri_project'))
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};
 
 fprintf('Average ROI (supervoxel)\n')
-fprintf('(Conditions 0-3 used as labels)\n')
+fprintf('Label is whether picture or sentence is being viewed\n')
 
 % ROI avg for 3 training sets against 3 testing sets
-% SVM 1v1 Multiclass Classification (MATLAB library)
+% Naive Bayes Classifier (provided from Project Files in /fmri_project/)
 % Labels used are the conditions 1-3
 % Condition info found in the given data description provided by CMU:
 %   https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/README-data-documentation.txt
@@ -34,6 +34,7 @@ for n=1:length(starplus_data)
     starplus_examples(n).l = currentL;
     starplus_examples(n).i = currentI;
 end
+
 
 %6 choose 3 ways to have 3 training sets and 3 testing sets
 current_combo = 1;
@@ -77,10 +78,12 @@ for n=1:length(starplus_data)
                 testingL = [testingL; starplus_examples(testing_set_indices(l)).l];
                 testingI = [testingI; starplus_examples(testing_set_indices(l)).i];
             end
-            svmClassifier = fitcecoc(trainingEx, trainingL);
-            predictedLabels = predict(svmClassifier, testingEx);
-            avgSVMaccuracy = (sum(predictedLabels == testingL)) / length(predictedLabels);
-            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', avgSVMaccuracy);
+            avgNBClassifier = trainClassifier(trainingEx, trainingL, 'nbayes');
+            avgNBPredict = applyClassifier(testingEx, avgNBClassifier, 'nbayes');
+            [result,predictedLabels,trace] = summarizePredictions(avgNBPredict,avgNBClassifier,'averageRank',testingL);
+            avgNBaccuracy = 1 - result{1};
+            fprintf('--Average Rank Accuracy: %f\n', avgNBaccuracy);
+            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', (sum(predictedLabels == testingL)) / length(testingL));
             current_combo = current_combo + 1;
         end
     end
