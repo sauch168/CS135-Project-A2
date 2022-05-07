@@ -6,7 +6,10 @@ fprintf('Average ROI (supervoxel)\n')
 fprintf('(Conditions 0-3 used as labels)\n')
 
 % ROI avg for 3 training sets against 3 testing sets
-% SVM 1v1 Multiclass Classification
+% SVM 1v1 Multiclass Classification (MATLAB library)
+% Labels used are the conditions 1-3
+% Condition info found in the given data description provided by CMU:
+%   https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/README-data-documentation.txt
 
 data04799 = load('data-starplus-04799-v7.mat');
 data04820 = load('data-starplus-04820-v7.mat');
@@ -76,7 +79,7 @@ for n=1:length(starplus_data)
             svmClassifier = fitcecoc(trainingEx, trainingL);
             predictedLabels = predict(svmClassifier, testingEx);
             avgSVMaccuracy = (sum(predictedLabels == testingL)) / length(predictedLabels);
-            fprintf('--Accuracy: %f\n', avgSVMaccuracy);
+            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', avgSVMaccuracy);
             current_combo = current_combo + 1;
         end
     end

@@ -7,6 +7,9 @@ fprintf('(Conditions 0-3 used as labels)\n')
 
 % ROI avg for 3 training sets against 3 testing sets
 % Naive Bayes Classifier (provided from Project Files in /fmri_project/)
+% Labels used are the conditions 1-3
+% Condition info found in the given data description provided by CMU:
+%   https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/README-data-documentation.txt
 
 data04799 = load('data-starplus-04799-v7.mat');
 data04820 = load('data-starplus-04820-v7.mat');
@@ -77,8 +80,8 @@ for n=1:length(starplus_data)
             avgNBPredict = applyClassifier(testingEx, avgNBClassifier, 'nbayes');
             [result,predictedLabels,trace] = summarizePredictions(avgNBPredict,avgNBClassifier,'averageRank',testingL);
             avgNBaccuracy = 1 - result{1};
-            fprintf('--Accuracy: %f\n', avgNBaccuracy);
-            fprintf('--Accuracy Second Measure: %f\n', (sum(predictedLabels == testingL)) / length(testingL));
+            fprintf('--Average Rank Accuracy: %f\n', avgNBaccuracy);
+            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', (sum(predictedLabels == testingL)) / length(testingL));
             current_combo = current_combo + 1;
         end
     end
