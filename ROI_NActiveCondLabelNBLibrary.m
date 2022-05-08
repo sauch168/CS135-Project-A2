@@ -2,12 +2,20 @@ addpath(genpath('fmri_project'))
 
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};
 
-fprintf('Average ROI (supervoxel)\nSVM Classifier (1v1 if multi-class) (MATLAB library)\n')
-fprintf('Label is whether picture or sentence is being viewed\n')
+% In our observations, the higher the number of voxels seems to yield
+% better results
+numVoxels = 50;
+
+fprintf('%d Most Active Voxels for each ROI\nNaive Bayes Classifier (MATLAB library)\n',numVoxels);
+fprintf('(Conditions 2-3 used as labels)\n')
 
 % ROI avg for 3 training sets against 3 testing sets
-% SVM Classification (from MATLAB library) (1v1 when Multi-class)
-% Labels used are 1(viewing picture),2(viewing sentence)
+% Naive Bayes Classifier (MATLAB Library)
+% Labels used are the conditions 2-3
+% 2 means the person was shown a sentence with no negation
+% 3 means the person was shown a sentence with a negation
+% Condition info found in the given data description provided by CMU:
+%   https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/README-data-documentation.txt
 
 data04799 = load('data-starplus-04799-v7.mat');
 data04820 = load('data-starplus-04820-v7.mat');
@@ -20,53 +28,40 @@ starplus_data_numbers = [4799, 4820, 4847, 5675, 5680, 5710];
 starplus_examples = [];
 starplus_examples(6).ex = [];
 %generate usable examples
-% P/S Label methodology adapted and modified from:
-%   https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/README-software-documentation.txt
 for n=1:length(starplus_data)
     current_set = starplus_data(n);
-    % remove trials for unusable data and resting periods
     [i,d,m]=transformIDM_selectTrials( ...
         current_set.info, ...
         current_set.data, ...
-        current_set.meta, find([current_set.info.cond]>1));
-    [picI,picD,picM]=transformIDM_selectTrials(i,d,m,find([i.firstStimulus]=='P'));
-    % Picture was first set in these trials, so sentence is second set
-    [senI,senD,senM]=transformIDM_selectTrials(i,d,m,find([i.firstStimulus]=='S'));
-    % Sentence was first set in these trials, so picture is second set
-
-    % Each set is 16 images as specified in the README of /fmri_project/
-
-    % Pictures
-    [picI1,picD1,picM1]=transformIDM_selectTimewindow(picI,picD,picM,[1:16]);
-    [picI1,picD1,picM1]=transformIDM_avgROIVoxels(picI1,picD1,picM1);
-    [picI2,picD2,picM2]=transformIDM_selectTimewindow(senI,senD,senM,[17:32]);
-    [picI2,picD2,picM2]=transformIDM_avgROIVoxels(picI2,picD2,picM2);
-
-    % Sentences
-    [senI1,senD1,senM1]=transformIDM_selectTimewindow(picI,picD,picM,[17:32]);
-    [senI1,senD1,senM1]=transformIDM_avgROIVoxels(senI1,senD1,senM1);
-    [senI2,senD2,senM2]=transformIDM_selectTimewindow(senI,senD,senM,[1:16]);
-    [senI2,senD2,senM2]=transformIDM_avgROIVoxels(senI2,senD2,senM2);
-
-    % Make example set of only pics and its labels (1 for pic)
-    [pic1Ex,~,pic1Info]=idmToExamples_condLabel(picI1,picD1,picM1);
-    [pic2Ex,~,pic2Info]=idmToExamples_condLabel(picI2,picD2,picM2);
-    picExamples = transpose([pic1Ex; pic2Ex]);
-    picInfo = [pic1Info; pic2Info];
-    picLabels = ones(length(picExamples),1);
-
-    % Make example set of only sentences and its labels (2 for sentence)
-    [sen1Ex,~,sen1Info]=idmToExamples_condLabel(senI1,senD1,senM1);
-    [sen2Ex,~,sen2Info]=idmToExamples_condLabel(senI2,senD2,senM2);
-    senExamples = transpose([sen1Ex; sen2Ex]);
-    senInfo = [sen1Info; sen2Info];
-    senLabels = 2 * ones(length(senExamples),1);
-
-    starplus_examples(n).ex = [picExamples; senExamples];
-    starplus_examples(n).l = [picLabels; senLabels];
-    starplus_examples(n).i = [picInfo; senInfo];
+        current_set.meta, find([current_set.info.cond]==2));
+    currentEx = []
+    currentL = []
+    currentI = []
+    for z=1:length(relevantROI)
+        [Ri,Rd,Rm]=transformIDM_selectROIVoxels(i,d,m,relevantROI(z));
+        [Ri,Rd,Rm]=transformIDM_selectActiveVoxels(Ri,Rd,Rm,numVoxels);
+        [Rex,Rl,Rinfo]=idmToExamples_condLabel(Ri,Rd,Rm);
+        currentEx = [currentEx; Rex];
+        currentL = [currentL; Rl];
+        currentI = [currentI; Rinfo];
+    end
+    [i,d,m]=transformIDM_selectTrials( ...
+        current_set.info, ...
+        current_set.data, ...
+        current_set.meta, find([current_set.info.cond]==3));
+    for z=1:length(relevantROI)
+        [Ri,Rd,Rm]=transformIDM_selectROIVoxels(i,d,m,relevantROI(z));
+        [Ri,Rd,Rm]=transformIDM_selectActiveVoxels(Ri,Rd,Rm,numVoxels);
+        [Rex,Rl,Rinfo]=idmToExamples_condLabel(Ri,Rd,Rm);
+        currentEx = [currentEx; Rex];
+        currentL = [currentL; Rl];
+        currentI = [currentI; Rinfo];
+    end
+    
+    starplus_examples(n).ex = currentEx;
+    starplus_examples(n).l = currentL;
+    starplus_examples(n).i = currentI;
 end
-
 
 %6 choose 3 ways to have 3 training sets and 3 testing sets
 current_combo = 1;
@@ -110,10 +105,9 @@ for n=1:length(starplus_data)
                 testingL = [testingL; starplus_examples(testing_set_indices(l)).l];
                 testingI = [testingI; starplus_examples(testing_set_indices(l)).i];
             end
-            svmClassifier = fitcecoc(trainingEx, trainingL);
-            predictedLabels = predict(svmClassifier, testingEx);
-            avgSVMaccuracy = (sum(predictedLabels == testingL)) / length(predictedLabels);
-            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', avgSVMaccuracy);
+            nbClassifier = fitcnb(trainingEx,trainingL);
+            predictedLabels = predict(nbClassifier,testingEx);
+            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', (sum(predictedLabels == testingL)) / length(testingL));
             current_combo = current_combo + 1;
         end
     end

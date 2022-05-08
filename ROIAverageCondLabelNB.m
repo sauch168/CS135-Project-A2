@@ -3,11 +3,13 @@ addpath(genpath('fmri_project'))
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};
 
 fprintf('Average ROI (supervoxel)\nNaive Bayes Classifier (/fmri_project/)\n')
-fprintf('(Conditions 0-3 used as labels)\n')
+fprintf('(Conditions 2-3 used as labels)\n')
 
 % ROI avg for 3 training sets against 3 testing sets
 % Naive Bayes Classifier (provided from Project Files in /fmri_project/)
-% Labels used are the conditions 1-3
+% Labels used are the conditions 2-3
+% 2 means the person was shown a sentence with no negation
+% 3 means the person was shown a sentence with a negation
 % Condition info found in the given data description provided by CMU:
 %   https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/README-data-documentation.txt
 
@@ -27,7 +29,7 @@ for n=1:length(starplus_data)
     [i,d,m]=transformIDM_selectTrials( ...
         current_set.info, ...
         current_set.data, ...
-        current_set.meta, find([current_set.info.cond]~=0));
+        current_set.meta, find([current_set.info.cond]>1));
     [i,d,m]=transformIDM_avgROIVoxels(i,d,m,relevantROI);
     [currentEx,currentL,currentI] = idmToExamples_condLabel(i,d,m);
     starplus_examples(n).ex = currentEx;
