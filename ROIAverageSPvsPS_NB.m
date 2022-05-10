@@ -1,3 +1,7 @@
+%%%% Labels are SP (shown picture first and then sentence) and PS
+%%%%    (shown sentence first and then picture)
+
+
 addpath(genpath('fmri_project'))
 
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};

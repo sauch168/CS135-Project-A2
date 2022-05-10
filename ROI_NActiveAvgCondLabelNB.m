@@ -1,10 +1,14 @@
+%%%% Labels are 2 (person was given a sentence with no negation) and
+%%%%    3 (person was given a sentence with a negation)
+
 addpath(genpath('fmri_project'))
 
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};
+%relevantROI = {'CALC', 'LIPL', 'LIPS', 'LOPER'};
 %weird accuracy results so far?
 % In our observations, the higher the number of voxels seems to yield
 % better results
-numVoxels = 62;
+numVoxels = 100;
 
 fprintf('%d Most Active Average Voxel for each ROI\nNaive Bayes Classifier (/fmri_project/)\n',numVoxels);
 fprintf('(Conditions 2-3 used as labels)\n')
@@ -33,32 +37,28 @@ for n=1:length(starplus_data)
     [i,d,m]=transformIDM_selectTrials( ...
         current_set.info, ...
         current_set.data, ...
-        current_set.meta, find([current_set.info.cond]==2));
-    currentEx = []
-    currentL = []
-    currentI = []
-    for z=1:length(relevantROI)
-        [Ri,Rd,Rm]=transformIDM_selectROIVoxels(i,d,m,relevantROI(z));
-        [Ri,Rd,Rm]=transformIDM_selectActiveVoxels(Ri,Rd,Rm,numVoxels);
-        [Ri,Rd,Rm]=transformIDM_avgVoxels(Ri,Rd,Rm,{1:numVoxels});
-        [Rex,Rl,Rinfo]=idmToExamples_condLabel(Ri,Rd,Rm);
-        currentEx = [currentEx; Rex];
-        currentL = [currentL; Rl];
-        currentI = [currentI; Rinfo];
-    end
-    [i,d,m]=transformIDM_selectTrials( ...
-        current_set.info, ...
-        current_set.data, ...
-        current_set.meta, find([current_set.info.cond]==3));
-    for z=1:length(relevantROI)
-        [Ri,Rd,Rm]=transformIDM_selectROIVoxels(i,d,m,relevantROI(z));
-        [Ri,Rd,Rm]=transformIDM_selectActiveVoxels(Ri,Rd,Rm,numVoxels);
-        [Ri,Rd,Rm]=transformIDM_avgVoxels(Ri,Rd,Rm,{1:numVoxels});
-        [Rex,Rl,Rinfo]=idmToExamples_condLabel(Ri,Rd,Rm);
-        currentEx = [currentEx; Rex];
-        currentL = [currentL; Rl];
-        currentI = [currentI; Rinfo];
-    end
+        current_set.meta, find([current_set.info.cond]>1));
+    currentEx = [];
+    currentL = [];
+    currentI = [];
+    [Ri,Rd,Rm]=transformIDM_selectROIVoxels(i,d,m,relevantROI);
+    [Ri,Rd,Rm]=transformIDM_selectActiveVoxels(Ri,Rd,Rm,numVoxels);
+    [Ri,Rd,Rm]=transformIDM_avgVoxels(Ri,Rd,Rm,{1:Rm.nvoxels});
+    [Rex,Rl,Rinfo]=idmToExamples_condLabel(Ri,Rd,Rm);
+    currentEx = [currentEx; Rex];
+    currentL = [currentL; Rl];
+    currentI = [currentI; Rinfo];
+    %[i,d,m]=transformIDM_selectTrials( ...
+        %current_set.info, ...
+        %current_set.data, ...
+        %current_set.meta, find([current_set.info.cond]==3));
+    %[Ri,Rd,Rm]=transformIDM_selectROIVoxels(i,d,m,relevantROI);
+    %[Ri,Rd,Rm]=transformIDM_selectActiveVoxels(Ri,Rd,Rm,numVoxels);
+    %[Ri,Rd,Rm]=transformIDM_avgVoxels(Ri,Rd,Rm,{1:Rm.nvoxels});
+    %[Rex,Rl,Rinfo]=idmToExamples_condLabel(Ri,Rd,Rm);
+    currentEx = [currentEx; Rex];
+    currentL = [currentL; Rl];
+    currentI = [currentI; Rinfo];
     
     starplus_examples(n).ex = currentEx;
     starplus_examples(n).l = currentL;

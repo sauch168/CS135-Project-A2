@@ -1,3 +1,6 @@
+%%%% Labels are 2 (person was given a sentence with no negation) and
+%%%%    3 (person was given a sentence with a negation)
+
 addpath(genpath('fmri_project'))
 
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};

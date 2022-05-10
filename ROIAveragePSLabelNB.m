@@ -1,3 +1,6 @@
+%%%% Labels are S (all data where person was shown a sentence) and
+%%%%    P (all data where person was shown a picture)
+
 addpath(genpath('fmri_project'))
 
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};
@@ -51,16 +54,18 @@ for n=1:length(starplus_data)
     % Make example set of only pics and its labels (1 for pic)
     [pic1Ex,~,pic1Info]=idmToExamples_condLabel(picI1,picD1,picM1);
     [pic2Ex,~,pic2Info]=idmToExamples_condLabel(picI2,picD2,picM2);
-    picExamples = transpose([pic1Ex; pic2Ex]);
+    picExamples = [pic1Ex; pic2Ex];
+    currSize = size(picExamples);
     picInfo = [pic1Info; pic2Info];
-    picLabels = ones(length(picExamples),1);
+    picLabels = ones(currSize(1),1);
 
     % Make example set of only sentences and its labels (2 for sentence)
     [sen1Ex,~,sen1Info]=idmToExamples_condLabel(senI1,senD1,senM1);
     [sen2Ex,~,sen2Info]=idmToExamples_condLabel(senI2,senD2,senM2);
-    senExamples = transpose([sen1Ex; sen2Ex]);
+    senExamples = [sen1Ex; sen2Ex];
     senInfo = [sen1Info; sen2Info];
-    senLabels = 2 * ones(length(senExamples),1);
+    currSize = size(senExamples);
+    senLabels = 2 * ones(currSize(1),1);
 
     starplus_examples(n).ex = [picExamples; senExamples];
     starplus_examples(n).l = [picLabels; senLabels];
