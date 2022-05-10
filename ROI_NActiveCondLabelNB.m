@@ -37,9 +37,9 @@ for n=1:length(starplus_data)
         current_set.info, ...
         current_set.data, ...
         current_set.meta, find([current_set.info.cond]==2));
-    currentEx = []
-    currentL = []
-    currentI = []
+    currentEx = [];
+    currentL = [];
+    currentI = [];
     for z=1:length(relevantROI)
         [Ri,Rd,Rm]=transformIDM_selectROIVoxels(i,d,m,relevantROI(z));
         [Ri,Rd,Rm]=transformIDM_selectActiveVoxels(Ri,Rd,Rm,numVoxels);
