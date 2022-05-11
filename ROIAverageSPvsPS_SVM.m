@@ -108,7 +108,8 @@ for n=1:length(starplus_data)
                 testingL = [testingL; starplus_examples(testing_set_indices(l)).l];
                 testingI = [testingI; starplus_examples(testing_set_indices(l)).i];
             end
-            svmClassifier = fitcecoc(trainingEx,trainingL);
+            t=templateSVM('KernelFunction','linear','KernelScale','auto');
+            svmClassifier = fitcecoc(trainingEx,trainingL,'Learners',t,'Coding','onevsone');
             predictedLabels = predict(svmClassifier,testingEx);
             fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', (sum(predictedLabels == testingL)) / length(testingL));
             current_combo = current_combo + 1;

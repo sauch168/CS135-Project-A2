@@ -1,7 +1,7 @@
 %%%% Labels are SP (shown picture first and then sentence) and PS
 %%%%    (shown sentence first and then picture)
 
-
+name = 'ROI_AverageSPvsPS_NBLibrary';
 addpath(genpath('fmri_project'))
 
 relevantROI = {'CALC' 'LIPL' 'LT' 'LTRIA' 'LOPER' 'LIPS' 'LDLPFC'};
@@ -68,6 +68,7 @@ end
 
 %6 choose 3 ways to have 3 training sets and 3 testing sets
 current_combo = 1;
+all_accuracies = ones(20, 1);
 for n=1:length(starplus_data)
     for j=n+1:length(starplus_data)
         for k=j+1:length(starplus_data)
@@ -110,8 +111,11 @@ for n=1:length(starplus_data)
             end
             nbClassifier = fitcnb(trainingEx,trainingL);
             predictedLabels = predict(nbClassifier,testingEx);
-            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', (sum(predictedLabels == testingL)) / length(testingL));
+            currAcc = (sum(predictedLabels == testingL)) / length(testingL);
+            fprintf('--Accuracy (correct predicted labels / # of labels): %f\n', currAcc);
+            all_accuracies(current_combo) = currAcc;
             current_combo = current_combo + 1;
         end
     end
 end
+overallAccuracy = mean(all_accuracies);
