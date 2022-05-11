@@ -1,0 +1,28 @@
+NB, svmlinear, svmrbf
+
+accuracy,loss
+
+active, activeavg, roi avg
+
+Cond label, SP vs PS (all), SP vs PS (SP), SP vs PS (PS), S vs P
+
+completed:
+avg sp vs ps svmlinear
+avg sp vs ps nb
+active sp vs ps svmlinear
+active sp vs ps nb
+active avg sp vs ps svmlinear
+active avg sp vs ps nb
+avg cond svmlinear
+avg cond nb
+active cond svmlinear
+active cond nb
+active avg cond svmlinear
+active avg cond nb
+
+need to do:
+avg/active/activeavg sp vs ps (sp) svmlinear
+same for nb
+avg/active/activeavg sp vs ps (ps) svmlinear
+same for nb
+
