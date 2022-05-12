@@ -6,7 +6,10 @@ https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/
 
 All files in the root/highest directory of this repository were written by 
 our team.
-We used the code sourced from CMU to parse the data as it is not usable in its raw state.
+
+We used the code sourced from CMU to parse the data as it is not usable in its raw state. This would include functions to pull from each ROI in a dataset, pull the most active voxels in a dataset, pull specific averages in a dataset, and convert the dataset into a trainable/testable examples (a matrix).
+
+The classifiers used were all found in the MATLAB library (fitcecoc, templateSVM, fitcnb)
 
 # Naming scheme legends
 
@@ -20,7 +23,7 @@ We used the code sourced from CMU to parse the data as it is not usable in its r
     - SPvsPS_SP means the label will be subject viewed sentence after picture vs. subject viewed picture after sentence, but the testing set only includes the SP label
     - PvsS means the label will be the subject is viewing a picture vs the subject is viewing a sentence
     - Cond means the label will be the condition 2 or 3; 2 means the subject is presented with a sentence without a negation, 3 means the subject is presented with a sentence with a negation
-- IF USING "scriptRun":
+- IF USING "scriptRun", the workspace will contain variables with names corresponding to the below:
     - SVML = svmlinear, SVMR = svmrbf
     - accuracy = average accuracy
     - accuracies = accuracy of each combination (20 if 3 training 3 testing, 6 if 5 training 1 testing)
