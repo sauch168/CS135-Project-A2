@@ -4,3 +4,4 @@ clS % clear and run initialSetup
 scriptAll3Training3Testing
 
 % run all models for 5 training 1 testing
+scriptAll5Training1Testing
