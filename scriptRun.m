@@ -1,4 +1,4 @@
-initialSetup
+clS % clear and run initialSetup
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% SP vs PS label (testing set is SP + PS)
 
