@@ -14,6 +14,11 @@ runAll_3T3T_SPvsPS_SP
 runAll_3T3T_SPvsPS_PS
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% P vs S label
+
+runAll_3T3T_PvsS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Sentence w/o negation vs sentence w/ negation
 
 runAll_3T3T_Cond

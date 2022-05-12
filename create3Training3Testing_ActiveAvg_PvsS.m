@@ -17,15 +17,24 @@ for n=1:length(starplus_data)
 
     % Pictures
     [picI1,picD1,picM1]=transformIDM_selectTimewindow(picI,picD,picM,[1:16]);
-    [picI1,picD1,picM1]=transformIDM_avgROIVoxels(picI1,picD1,picM1);
+    [picI1,picD1,picM1]=transformIDM_selectROIVoxels(picI1,picD1,picM1,relevantROI);
+    [picI1,picD1,picM1]=transformIDM_selectActiveVoxels(picI1,picD1,picM1,numVoxels);
+    [picI1,picD1,picM1]=transformIDM_avgVoxels(picI1,picD1,picM1,{1:picM1.nvoxels});
     [picI2,picD2,picM2]=transformIDM_selectTimewindow(senI,senD,senM,[17:32]);
-    [picI2,picD2,picM2]=transformIDM_avgROIVoxels(picI2,picD2,picM2);
+    [picI2,picD2,picM2]=transformIDM_selectROIVoxels(picI2,picD2,picM2,relevantROI);
+    [picI2,picD2,picM2]=transformIDM_selectActiveVoxels(picI2,picD2,picM2,numVoxels);
+    [picI2,picD2,picM2]=transformIDM_avgVoxels(picI2,picD2,picM2,{1:picM2.nvoxels});
 
     % Sentences
     [senI1,senD1,senM1]=transformIDM_selectTimewindow(picI,picD,picM,[17:32]);
-    [senI1,senD1,senM1]=transformIDM_avgROIVoxels(senI1,senD1,senM1);
+    [senI1,senD1,senM1]=transformIDM_selectROIVoxels(senI1,senD1,senM1,relevantROI);
+    [senI1,senD1,senM1]=transformIDM_selectActiveVoxels(senI1,senD1,senM1,numVoxels);
+    [senI1,senD1,senM1]=transformIDM_avgVoxels(senI1,senD1,senM1,{1:senM1.nvoxels});
     [senI2,senD2,senM2]=transformIDM_selectTimewindow(senI,senD,senM,[1:16]);
-    [senI2,senD2,senM2]=transformIDM_avgROIVoxels(senI2,senD2,senM2);
+    [senI2,senD2,senM2]=transformIDM_selectROIVoxels(senI2,senD2,senM2,relevantROI);
+    [senI2,senD2,senM2]=transformIDM_selectActiveVoxels(senI2,senD2,senM2,numVoxels);
+    [senI2,senD2,senM2]=transformIDM_avgVoxels(senI2,senD2,senM2,{1:senM2.nvoxels});
+
 
     % Make example set of only pics and its labels (1 for pic)
     [pic1Ex,~,pic1Info]=idmToExamples_condLabel(picI1,picD1,picM1);

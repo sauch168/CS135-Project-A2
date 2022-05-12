@@ -55,24 +55,24 @@ numVoxels = 50;
 classifier = 'nb';
 create3Training3Testing_Active_SPvsPS
 run3Training3Testing
-NB_accuracies_SPvsPS_PS_active = all_accuracies;
-NB_accuracy_SPvsPS_PS_active = overallAccuracy;
-NB_losses_SPvsPS_PS_active = all_losses;
-NB_loss_SPvsPS_PS_active = overallLoss;
+NB_accuracies_SPvsPS_active = all_accuracies;
+NB_accuracy_SPvsPS_active = overallAccuracy;
+NB_losses_SPvsPS_active = all_losses;
+NB_loss_SPvsPS_active = overallLoss;
 
 fprintf('SP vs PS label, ROI Avg')
 create3Training3Testing_ROIAvg_SPvsPS
 run3Training3Testing
-NB_accuracies_SPvsPS_PS_ROIAvg = all_accuracies;
-NB_accuracy_SPvsPS_PS_ROIAvg = overallAccuracy;
-NB_losses_SPvsPS_PS_ROIAvg = all_losses;
-NB_loss_SPvsPS_PS_ROIAvg = overallLoss;
+NB_accuracies_SPvsPS_ROIAvg = all_accuracies;
+NB_accuracy_SPvsPS_ROIAvg = overallAccuracy;
+NB_losses_SPvsPS_ROIAvg = all_losses;
+NB_loss_SPvsPS_ROIAvg = overallLoss;
 
 fprintf('SP vs PS label, Active Avg')
 numVoxels = 100;
 create3Training3Testing_ActiveAvg_SPvsPS
 run3Training3Testing
-NB_accuracies_SPvsPS_PS_activeAvg = all_accuracies;
-NB_accuracy_SPvsPS_PS_activeAvg = overallAccuracy;
-NB_losses_SPvsPS_PS_activeAvg = all_losses;
-NB_loss_SPvsPS_PS_activeAvg = overallLoss;
+NB_accuracies_SPvsPS_activeAvg = all_accuracies;
+NB_accuracy_SPvsPS_activeAvg = overallAccuracy;
+NB_losses_SPvsPS_activeAvg = all_losses;
+NB_loss_SPvsPS_activeAvg = overallLoss;
