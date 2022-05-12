@@ -23,10 +23,10 @@ avg/active/activeavg sp vs ps (sp) svmlinear/rbf
 same for nb
 avg/active/activeavg sp vs ps (ps) svmlinear/rbf
 same for nb
-
-need to do:
 avg/active/activeavg p vs s svmlinear/rbf
 same for nb
+
+need to do:
 avg/active/activeavg fixation vs not svmlinear/rbf
 same for nb
 do all of the above for 5 training, 1 testing
