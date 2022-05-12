@@ -16,3 +16,6 @@ starplus_data = [data04799, data04820, data04847, data05675, data05680, data0571
 starplus_data_numbers = [4799, 4820, 4847, 5675, 5680, 5710];
 starplus_examples = [];
 starplus_examples(6).ex = [];
+starplus_examples2 = [];
+starplus_examples2(6).ex = [];
+SPorPS = 1; % 1 for SP only, 2 for PS only
