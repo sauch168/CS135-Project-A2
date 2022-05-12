@@ -1,21 +1,6 @@
 clS % clear and run initialSetup
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% SP vs PS label (testing set is SP + PS)
 
-runAll_PSvsSP
+% run all models for 3 training 3 testing
+scriptAll3Training3Testing
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% SP vs PS label (testing set is SP only)
-
-runAll_PSvsSP_SP
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% SP vs PS label (testing set is PS only)
-
-runAll_PSvsSP_PS
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Sentence w/o negation vs sentence w/ negation
-
-runAll_Cond
-
+% run all models for 5 training 1 testing
