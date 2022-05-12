@@ -1,0 +1,32 @@
+NB, svmlinear, svmrbf
+
+accuracy,loss
+
+active, activeavg, roi avg
+
+Cond label, SP vs PS (all), SP vs PS (SP), SP vs PS (PS), S vs P
+
+completed:
+avg sp vs ps svmlinear/rbf
+avg sp vs ps nb
+active sp vs ps svmlinear/rbf
+active sp vs ps nb
+active avg sp vs ps svmlinear/rbf
+active avg sp vs ps nb
+avg cond svmlinear/rbf
+avg cond nb
+active cond svmlinear/rbf
+active cond nb
+active avg cond svmlinear/rbf
+active avg cond nb
+avg/active/activeavg sp vs ps (sp) svmlinear/rbf
+same for nb
+avg/active/activeavg sp vs ps (ps) svmlinear/rbf
+same for nb
+avg/active/activeavg p vs s svmlinear/rbf
+same for nb
+do all of the above for 5 training, 1 testing
+
+need to do:
+still need to add KNN for all of the above
+

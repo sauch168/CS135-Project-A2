@@ -1,5 +1,6 @@
 .DS_store
 projScript.m
 projScript2.m
+testScript.m
 *.mat
 *.asv
