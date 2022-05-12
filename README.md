@@ -25,6 +25,8 @@ The classifiers used were all found in the MATLAB library (fitcecoc, templateSVM
     - Cond means the label will be the condition 2 or 3; 2 means the subject is presented with a sentence without a negation, 3 means the subject is presented with a sentence with a negation
 - IF USING "scriptRun", the workspace will contain variables with names corresponding to the below:
     - SVML = svmlinear, SVMR = svmrbf
+    - NB = naive bayes
+    - KNN5 = KNN with 5 neighbors, KNN7 is 7 neighbors, KNN9 is 9 neighbors
     - accuracy = average accuracy
     - accuracies = accuracy of each combination (20 if 3 training 3 testing, 6 if 5 training 1 testing)
     - loss = average hinge loss
@@ -44,7 +46,7 @@ To run all possible tests:
 To run individual tests:
 - run clS (clears and runs initialSetup)
 - type "classifier=(classifier_name)"
-    - classifier_name can be 'svmlinear', 'svmrbf', 'nb'
+    - classifier_name can be 'svmlinear', 'svmrbf', 'nb' ,'5nn', '7nn', '9nn'
 - type "numVoxels=(number_of_voxels)"
     - number_of_voxels can be any whole number up to the max number of voxels (which may vary), we suggest using 50 for Active and 100 for ActiveAvg
 - pick one of the files starting with 'createTrainingTesting...'
