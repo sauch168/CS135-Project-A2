@@ -20,8 +20,8 @@ The classifiers used were all found in the MATLAB library (fitcecoc, templateSVM
     - ActiveAvg means the training/testing sets will be the average of the N most active voxels
 - Label legend:
     - SPvsPS means the label will be subject viewed sentence after picture vs. subject viewed picture after sentence
-    - SPvsPS_PS means the label will be subject viewed sentence after picture vs. subject viewed picture after sentence, but the testing set only includes the PS label
-    - SPvsPS_SP means the label will be subject viewed sentence after picture vs. subject viewed picture after sentence, but the testing set only includes the SP label
+    - SPvsPS_SP (corresponds to SPvsPS_ONE with SPorPS=1) means the label will be subject viewed sentence after picture vs. subject viewed picture after sentence, but the testing set only includes the SP label (sentence after picture)
+    - SPvsPS_PS (corresponds to SPvsPS_ONE with SPorPS=2) means the label will be subject viewed sentence after picture vs. subject viewed picture after sentence, but the testing set only includes the PS label (picture after sentence)
     - PvsS means the label will be the subject is viewing a picture vs the subject is viewing a sentence
     - Cond means the label will be the condition 2 or 3; 2 means the subject is presented with a sentence without a negation, 3 means the subject is presented with a sentence with a negation
 - IF USING "scriptRun", the workspace will the desired results with variable names corresponding to the below:
