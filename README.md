@@ -1,5 +1,8 @@
 # CS135-Project-A2
+CS135 Final Project (fMRI)
 
+
+# Acknowledgements
 Everything in /fmri-project/ was sourced from CMU (Tom Mitchell and Wei Wang).
 
 Current Source Link for fMRI code:
@@ -9,8 +12,8 @@ https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/
 We used the code sourced from CMU to parse the data as it is not usable in its raw state. This would include functions to pull from each ROI in a dataset, pull the most active voxels in a dataset, pull specific averages in a dataset, and convert the dataset into a trainable/testable examples (a matrix).
 
 
+# Team
 Our Team: Samuel Chan, Farshad Darvish, Henry Zou
-CS135 Final Project
 
 All files in the root/highest directory of this repository were written by 
 our team.
@@ -34,9 +37,9 @@ The classifiers used were all found in the MATLAB library (fitcecoc, templateSVM
     - NB = naive bayes
     - KNN5 = KNN with 5 neighbors, KNN7 is 7 neighbors, KNN9 is 9 neighbors
     - accuracy = average accuracy
-    - accuracies = accuracy of each combination (20 if 3 training 3 testing, 6 if 5 training 1 testing)
+    - accuracies = accuracy of each combination (20 if 3 training 3 testing because 6 choose 3, 6 if 5 training 1 testing because 6 choose 1)
     - loss = average hinge loss
-    - losses = hinge loss of each combination (20 if 3 training 3 testing, 6 if 5 training 1 testing)
+    - losses = hinge loss of each combination (20 if 3 training 3 testing because 6 choose 3, 6 if 5 training 1 testing because 6 choose 1)
     - same label/set legends as above
 - Misc files:
     - clS
