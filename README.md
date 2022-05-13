@@ -1,4 +1,5 @@
 # CS135-Project-A2
+
 Everything in /fmri-project/ was sourced from CMU (Tom Mitchell and Wei Wang).
 
 Current Source Link for fMRI code:
@@ -6,6 +7,10 @@ http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/fmri_core.zip
 https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/
 
 We used the code sourced from CMU to parse the data as it is not usable in its raw state. This would include functions to pull from each ROI in a dataset, pull the most active voxels in a dataset, pull specific averages in a dataset, and convert the dataset into a trainable/testable examples (a matrix).
+
+
+Our Team: Samuel Chan, Farshad Darvish, Henry Zou
+CS135 Final Project
 
 All files in the root/highest directory of this repository were written by 
 our team.
@@ -70,7 +75,7 @@ To run individual tests:
 
 - next, if you chose to use a file ending with "SPvsPS_ONE" (which is the case for SPvsPS_SP and SPvsPS_PS, but not SPvsPS), run "run3Training3TestingAltSet" (3 datasets used to train, 3 datasets used to test) or "run5Training1TestingAltSet" (5 datasets used to train, 1 dataset used to test)
 - instead, if you chose a file with any other label, run "run3Training3Testing" (3 datasets used to train, 3 datasets used to test) or "run5Training1Testing" (5 datasets used to train, 1 dataset used to test)
-- In the workspace, there will be 4 key values:
+- In the workspace, there will be 4 key values for each of the label/classifier combos you have chosen:
     - overallAccuracy (the average of all accuracies)
     - overallLoss (the average of all hinge losses)
     - all_accuracies (a list of all accuracies)
