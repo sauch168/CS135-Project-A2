@@ -26,7 +26,7 @@ same for nb
 avg/active/activeavg p vs s svmlinear/rbf
 same for nb
 do all of the above for 5 training, 1 testing
-
-need to do:
 still need to add KNN for all of the above
 
+need to do:
+None?
