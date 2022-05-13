@@ -57,6 +57,18 @@ for n=1:length(starplus_data)
                 svmClassifier = fitcecoc(trainingEx,trainingL,'Learners',t,'Coding','onevsone');
                 predictedLabels = predict(svmClassifier,testingEx);
                 currLoss = loss(svmClassifier,testingEx,testingL,'LossFun','hinge');
+            elseif strcmp(classifier, '5nn')
+                knnClassifier = fitcknn(trainingEx,trainingL,'NumNeighbors',5);
+                predictedLabels = predict(knnClassifier,testingEx);
+                currLoss = loss(knnClassifier,testingEx,testingL,'LossFun','hinge');
+            elseif strcmp(classifier, '7nn')
+                knnClassifier = fitcknn(trainingEx,trainingL,'NumNeighbors',7);
+                predictedLabels = predict(knnClassifier,testingEx);
+                currLoss = loss(knnClassifier,testingEx,testingL,'LossFun','hinge');
+            elseif strcmp(classifier, '9nn')
+                knnClassifier = fitcknn(trainingEx,trainingL,'NumNeighbors',9);
+                predictedLabels = predict(knnClassifier,testingEx);
+                currLoss = loss(knnClassifier,testingEx,testingL,'LossFun','hinge');
             end
             currAcc = (sum(predictedLabels == testingL)) / length(testingL);
 

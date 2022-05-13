@@ -1,13 +1,14 @@
 # CS135-Project-A2
 Everything in /fmri-project/ was sourced from CMU (Tom Mitchell and Wei Wang).
 
-Current Source Link for fMRI code: http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/fmri_core.zip
+Current Source Link for fMRI code:
+http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/fmri_core.zip
 https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/
+
+We used the code sourced from CMU to parse the data as it is not usable in its raw state. This would include functions to pull from each ROI in a dataset, pull the most active voxels in a dataset, pull specific averages in a dataset, and convert the dataset into a trainable/testable examples (a matrix).
 
 All files in the root/highest directory of this repository were written by 
 our team.
-
-We used the code sourced from CMU to parse the data as it is not usable in its raw state. This would include functions to pull from each ROI in a dataset, pull the most active voxels in a dataset, pull specific averages in a dataset, and convert the dataset into a trainable/testable examples (a matrix).
 
 The classifiers used were all found in the MATLAB library (fitcecoc, templateSVM, fitcnb)
 
@@ -23,7 +24,7 @@ The classifiers used were all found in the MATLAB library (fitcecoc, templateSVM
     - SPvsPS_SP means the label will be subject viewed sentence after picture vs. subject viewed picture after sentence, but the testing set only includes the SP label
     - PvsS means the label will be the subject is viewing a picture vs the subject is viewing a sentence
     - Cond means the label will be the condition 2 or 3; 2 means the subject is presented with a sentence without a negation, 3 means the subject is presented with a sentence with a negation
-- IF USING "scriptRun", the workspace will contain variables with names corresponding to the below:
+- IF USING "scriptRun", the workspace will the desired results with variable names corresponding to the below:
     - SVML = svmlinear, SVMR = svmrbf
     - NB = naive bayes
     - KNN5 = KNN with 5 neighbors, KNN7 is 7 neighbors, KNN9 is 9 neighbors
@@ -32,6 +33,15 @@ The classifiers used were all found in the MATLAB library (fitcecoc, templateSVM
     - loss = average hinge loss
     - losses = hinge loss of each combination (20 if 3 training 3 testing, 6 if 5 training 1 testing)
     - same label/set legends as above
+- Misc files:
+    - clS
+        - clears workspace and console, then runs initialSetup
+    - initialSetup
+        - loads in all relevant data and variables
+    - CS_135_NeurIPS_2022.pdf
+        - the report for this project
+    - files beginning with runAll
+        - runs either 3 training 3 testing or 5 training 1 testing for the relevant label according to the above legend
 
 
 # HOW TO RUN
@@ -50,10 +60,15 @@ To run individual tests:
 - type "numVoxels=(number_of_voxels)"
     - number_of_voxels can be any whole number up to the max number of voxels (which may vary), we suggest using 50 for Active and 100 for ActiveAvg
 - pick one of the files starting with 'createTrainingTesting...'
+- Important Note: For files ending with "SPvsPS_ONE", you must set SPorPS=1 or 2
+    - if it is set to 1, this means that the labels will be SP vs PS, but the testing set will only include SP (SPvsPS_SP)
+    - if it is set to 2, this means that the labels will be SP vs PS, but the testing set will only include PS (SPvsPS_PS)
+    - see Label Legend above for more details
+    - this is not necessary for an individual test of any file not ending with "SPvsPS_ONE"
     
 - There is a choice of either 3 training 3 testing (20 possible combinations) or 5 training 1 testing (6 possible combinations)
 
-- next, if you chose either a file with "SPvsPS_SP" or "SPvsPS_PS", run "run3Training3TestingAltSet" (3 datasets used to train, 3 datasets used to test) or "run5Training1TestingAltSet" (5 datasets used to train, 1 dataset used to test)
+- next, if you chose to use a file ending with "SPvsPS_ONE" (which is the case for SPvsPS_SP and SPvsPS_PS, but not SPvsPS), run "run3Training3TestingAltSet" (3 datasets used to train, 3 datasets used to test) or "run5Training1TestingAltSet" (5 datasets used to train, 1 dataset used to test)
 - instead, if you chose a file with any other label, run "run3Training3Testing" (3 datasets used to train, 3 datasets used to test) or "run5Training1Testing" (5 datasets used to train, 1 dataset used to test)
 - In the workspace, there will be 4 key values:
     - overallAccuracy (the average of all accuracies)
