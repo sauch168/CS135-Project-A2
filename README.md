@@ -10,6 +10,7 @@ http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/fmri_core.zip
 https://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-81/www/
 
 We used the code sourced from CMU to parse the data as it is not usable in its raw state. This would include functions to pull from each ROI in a dataset, pull the most active voxels in a dataset, pull specific averages in a dataset, and convert the dataset into a trainable/testable examples (a matrix).
+Essentially, from this link, we were able to access a library of functions which could fetch data based on aspects such as region or activity.
 
 
 # Team
